@@ -1,0 +1,38 @@
+.nav-menu {
+    border-radius: 30px;
+    background-image: linear-gradient(brown, white);
+    color: brown;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.button-sign-in {
+    margin-right: 10px;
+}
+
+.button-submit {
+    margin-left: 220px;
+}
+
+.text-take-another-test {
+    text-align: right;
+}
+
+.label-question {
+    text-align: end;
+}
+
+.label-register {
+    margin-left: 130px;
+}
+
+.checkbox-make-answer {
+    margin-right: 20px;
+}
+
+.nothing {
+    font-size: 100px;
+    font-family: "Gill Sans MT Ext Condensed Bold";
+    font-style: italic;
+}
