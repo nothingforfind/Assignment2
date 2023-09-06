@@ -28,9 +28,7 @@
 </div>
 
 <div class="container-fluid col-10">
-    <%
-        response.sendRedirect("http://localhost:8080/login");
-    %>
+    <jsp:include page="content-take-quiz.jsp" />
 </div>
 </body>
 
