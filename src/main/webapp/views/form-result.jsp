@@ -17,18 +17,34 @@
         <!-- Menu -->
         <nav class="pt-3 pb-3 mt-3 mb-5 text-center nav-menu">
             <div class="row">
-                <div class="col-md-2">Home</div>
-                <div class="col-md-2">Take Quiz</div>
-                <div class="col-md-2">Make Quiz</div>
-                <div class="col-md-2">Manage Quiz</div>
+                <div class="col-md-2"><a href="http://localhost:8080/signin">Home</a></div>
+                <div class="col-md-2"><a href="http://localhost:8080/take-quiz">Take Quiz</a></div>
+                <div class="col-md-2"><a href="http://localhost:8080/make-quiz">Make Quiz</a></div>
+                <div class="col-md-2"><a href="">Manage Quiz</a></div>
+                <% if (session.getAttribute("user") != null) { %>
+                <div class="col-md-4"><a href="http://localhost:8080/signout">Sign out</a></div>
+                <% } else { %>
                 <div class="col-md-4"></div>
+                <% } %>
             </div>
         </nav>
     </header>
 </div>
 
 <div class="container-fluid col-10">
-    <jsp:include page="content-result.jsp" />
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-9">Your score is ${sessionScope.result}</div>
+    </div>
+    <form action="/action_page.php">
+        <div class="row mt-3">
+            <div class="col-md-2"></div>
+            <div class="col-md-2 text-take-another-test">Take another test</div>
+            <div class="col-md-8">
+                <input type="submit" class="button-another-test" value="Submit">
+            </div>
+        </div>
+    </form>
 </div>
 </body>
 

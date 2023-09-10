@@ -12,7 +12,6 @@
 </head>
 
 <body>
-
 <div class="container-fluid col-11">
     <header>
         <!-- Menu -->
@@ -22,11 +21,7 @@
                 <div class="col-md-2"><a href="http://localhost:8080/take-quiz">Take Quiz</a></div>
                 <div class="col-md-2"><a href="http://localhost:8080/make-quiz">Make Quiz</a></div>
                 <div class="col-md-2"><a href="">Manage Quiz</a></div>
-                <% if (session.getAttribute("user") != null) { %>
-                <div class="col-md-4"><a href="http://localhost:8080/signout">Sign out</a></div>
-                <% } else { %>
                 <div class="col-md-4"></div>
-                <% } %>
             </div>
         </nav>
     </header>
@@ -35,37 +30,49 @@
 <div class="container-fluid col-10">
     <content>
         <!-- Login Form -->
-        <form action="doing-quiz">
+        <form action="/login-choice" method="post">
             <div class="row">
-                <div class="col-md-3"></div>
+                <div class="col-md-4"></div>
                 <div class="col-md-3">
-                    <h2>Welcome, </h2>
+                    <h2>Login Form</h2>
+                </div>
+                <div class="col-md-5"></div>
+            </div>
+
+
+            <!-- Username -->
+            <div class="row mt-4">
+                <div class="col-md-3"></div>
+                <div class="col-md-1">Username: </div>
+                <div class="col-md-2">
+                    <input type="text" name="username">
                 </div>
                 <div class="col-md-6"></div>
             </div>
 
-            <!-- Label -->
-            <div class="row mt-5">
-                <div class="col-md-2"></div>
-                <div class="col-md-10">Enter number of questions: </div>
-            </div>
-
-            <!-- Input -->
+            <!-- Password -->
             <div class="row mt-2">
                 <div class="col-md-3"></div>
-                <div class="col-md-9">
-                    <input type="text" name="quizQuantity">
+                <div class="col-md-1">Password: </div>
+                <div class="col-md-2">
+                    <input type="text" name="password">
                 </div>
+                <div class="col-md-6"></div>
             </div>
 
             <!-- Button -->
             <div class="row mt-4">
                 <div class="col-md-4"></div>
                 <div class="col-md-2">
-                    <input type="submit" value="Start Quiz">
-                    <div class="col-md-6"></div>
+                    <button type="submit" name="submitButton" value="Sign in">Sign in</button>
+                    <button type="submit" name="submitButton" value="Sign up">Sign up</button>
                 </div>
+                <div class="col-md-6"></div>
+            </div>
         </form>
+        <% if (request.getAttribute("error") != null) { %>
+        <p class="text-center text-danger"><%= request.getAttribute("error") %></p>
+        <% } %>
     </content>
 </div>
 </body>

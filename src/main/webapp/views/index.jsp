@@ -29,7 +29,7 @@
 
 <div class="container-fluid col-10">
     <%
-        response.sendRedirect("http://localhost:8080/login");
+        response.sendRedirect("http://localhost:8080/signin");
     %>
 </div>
 </body>
