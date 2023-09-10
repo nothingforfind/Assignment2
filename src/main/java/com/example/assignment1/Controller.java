@@ -179,6 +179,7 @@ public class Controller {
         session.setAttribute("quantity", currentQuiz);
         if (currentQuiz > quantity) {
             String result = String.valueOf(((double) correctAnswer/(double) quantity)*100);
+            result = result.substring(0, 5);
             question = null;
             currentQuiz = 0;
             quantity = 0;

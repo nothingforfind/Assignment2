@@ -153,7 +153,6 @@ public class UserService {
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 result = resultSet.getBoolean("result");
-                System.out.println(result);
             }
         } catch (SQLException e) {
             e.printStackTrace();
