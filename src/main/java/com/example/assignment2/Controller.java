@@ -1,4 +1,4 @@
-package com.example.assignment1;
+package com.example.assignment2;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -69,8 +69,22 @@ public class Controller {
         return "form-make-quiz";
     }
 
+    @RequestMapping("manage-quiz")
+    public String toManageQuiz(HttpSession session) {
+
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            return "redirect:signin";
+        } else if (user.getRole().equals("user")) {
+            return "redirect:take-quiz";
+        }
+        List<Question> questionList = userService.getQuestions();
+        session.setAttribute("questionList", questionList);
+        return "form-manage-quiz";
+    }
+
     @PostMapping("login-choice")
-    public void checkLoginChoice(@RequestParam("submitButton") String submitButton,
+    public String checkLoginChoice(@RequestParam("submitButton") String submitButton,
                                    @RequestParam("username") String username,
                                    @RequestParam("password") String password,
                                    HttpServletRequest request,
@@ -78,18 +92,25 @@ public class Controller {
         if ("Sign in".equals(submitButton)) {
             request.setAttribute("username", username);
             request.setAttribute("password", password);
+
+            if (username.isEmpty() || password.isEmpty()) {
+                request.setAttribute("error", "Username and password cannot be null. Check again, please!");
+                return "form-signin";
+            }
+
             request.getServletContext().getRequestDispatcher("/authentication").forward(request, response);
-        } else {
-            response.sendRedirect("/signup");
         }
+        return ("form-signup");
     }
 
     @RequestMapping("authentication")
     public String authentication(HttpSession session,
-                                 HttpServletRequest request) throws ServletException, IOException {
+                                 HttpServletRequest request) {
         String username = (String) request.getAttribute("username");
         String password = (String) request.getAttribute("password");
+
         boolean result = userService.authentication(username, password);
+
         if (result) {
             User user = userService.getUser(username);
             session.setAttribute("user", user);
@@ -107,7 +128,12 @@ public class Controller {
                         @RequestParam("role") String role,
                            HttpServletRequest request) {
         boolean exist = userService.checkExist(username);
-        if (exist) {
+
+        if (username.isEmpty() || password.isEmpty() || email.isEmpty()) {
+            request.setAttribute("error", "Input cannot be null. Check again, please!");
+            return "form-signup";
+        }
+        else if (exist) {
             request.setAttribute("error", "This username is exist.");
             return "form-signup";
         } else {
@@ -128,6 +154,16 @@ public class Controller {
         String answer2 = request.getParameter("answer2");
         String answer3 = request.getParameter("answer3");
         String answer4 = request.getParameter("answer4");
+
+        if (option1 == null || option2 == null || option3 == null || option4 == null) {
+            request.setAttribute("error", "Options cannot be null. Check again, please!");
+            return "form-make-quiz";
+        }
+
+        if (answer1 == null && answer2 == null && answer3 == null && answer4 == null) {
+            request.setAttribute("error", "The question needs 1 or more answers. Check again, please!");
+            return "form-make-quiz";
+        }
 
         convertAnswer(answer1, answer2, answer3, answer4,
                 option1, option2, option3, option4);
@@ -165,11 +201,11 @@ public class Controller {
     }
 
     @RequestMapping("doing-quiz")
-    public String setQuiz (@RequestParam("quizQuantity") int quizQuantity,
-                           HttpServletRequest request) {
-        if (quizQuantity > 0)
+    public String setQuiz (@RequestParam("quizQuantity") int quizQuantity) {
+        if (quizQuantity > 0) {
             quantity = quizQuantity;
             quizList = userService.getQuestionsByQuantity(quizQuantity);
+        }
         return "redirect:quiz";
     }
 
@@ -179,7 +215,9 @@ public class Controller {
         session.setAttribute("quantity", currentQuiz);
         if (currentQuiz > quantity) {
             String result = String.valueOf(((double) correctAnswer/(double) quantity)*100);
-            result = result.substring(0, 5);
+            if (result.length() > 5) {
+                result = result.substring(0, 5);
+            }
             question = null;
             currentQuiz = 0;
             quantity = 0;
@@ -194,7 +232,7 @@ public class Controller {
     }
 
     @RequestMapping("evaluate")
-    public String evaluate(HttpServletRequest request, HttpSession session) {
+    public String evaluate(HttpServletRequest request) {
         String userAnswer1 = request.getParameter("an1");
         String userAnswer2 = request.getParameter("an2");
         String userAnswer3 = request.getParameter("an3");

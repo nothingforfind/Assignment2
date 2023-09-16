@@ -41,14 +41,14 @@ END AS result;
 
 -- Đăng nhập có đúng tài khoản, mật khẩu hay không
 SELECT CASE
-    WHEN EXISTS (SELECT 1 FROM User WHERE user_id = 'admin2' and password = 'adminpass2')
+    WHEN EXISTS (SELECT * FROM User WHERE user_id = '' and password = '')
     THEN '1'
     ELSE '0'
 END AS result;
 
 -- Xóa toàn bộ dữ liệu đang có trong bảng User
 DELETE FROM User
-WHERE question_id < 1000;
+WHERE user_id = '';
 
 -- Reset số thứ tự quiz
 ALTER TABLE Quiz AUTO_INCREMENT = 1;
@@ -59,8 +59,24 @@ SELECT COUNT(*) FROM Quiz;
 -- Hiển thị toàn bộ thông tin quiz
 SELECT * FROM Quiz;
 
+-- Thêm cột created_date
+ALTER TABLE Quiz
+ADD created_date DATE;
+
+-- Cập nhật dữ liệu
+UPDATE Quiz
+SET created_date = '2023-09-15'
+WHERE created_date = null;
+
 -- Hiển thị 3 quiz bất kỳ
 SELECT * FROM Quiz ORDER BY RAND() LIMIT 3;
+
+-- Hiển thị tất cả quiz theo thứ tự mới nhất
+SELECT * FROM Quiz ORDER BY created_date DESC;
+
+-- Chỉnh lại cột created_time tự tăng
+ALTER TABLE Quiz
+MODIFY created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
 
 -- Xóa toàn bộ dữ liệu đang có trong bảng Quiz
 DELETE FROM Quiz

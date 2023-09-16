@@ -18,14 +18,16 @@
         <!-- Menu -->
         <nav class="pt-3 pb-3 mt-3 mb-5 text-center nav-menu">
             <div class="row">
+                <div class="col-md-1"></div>
                 <div class="col-md-2"><a href="http://localhost:8080/signin">Home</a></div>
                 <div class="col-md-2"><a href="http://localhost:8080/take-quiz">Take Quiz</a></div>
                 <div class="col-md-2"><a href="http://localhost:8080/make-quiz">Make Quiz</a></div>
-                <div class="col-md-2"><a href="">Manage Quiz</a></div>
+                <div class="col-md-2"><a href="http://localhost:8080/manage-quiz">Manage Quiz</a></div>
                 <% if (session.getAttribute("user") != null) { %>
-                <div class="col-md-4"><a href="http://localhost:8080/signout">Sign out</a></div>
+                <div class="col-md-2"><a href="http://localhost:8080/signout">Sign out</a></div>
+                <div class="col-md-1"></div>
                 <% } else { %>
-                <div class="col-md-4"></div>
+                <div class="col-md-3"></div>
                 <% } %>
             </div>
         </nav>
@@ -36,35 +38,38 @@
     <content>
         <!-- Login Form -->
         <form action="doing-quiz">
-            <div class="row">
-                <div class="col-md-3"></div>
+            <div class="row text-center">
+                <div class="col-md-4"></div>
                 <div class="col-md-3">
-                    <h2>Welcome, </h2>
+                    <h3>Welcome, ${sessionScope.user.userId}</h3>
                 </div>
-                <div class="col-md-6"></div>
+                <div class="col-md-5"></div>
             </div>
 
             <!-- Label -->
-            <div class="row mt-5">
-                <div class="col-md-2"></div>
-                <div class="col-md-10">Enter number of questions: </div>
+            <div class="row mt-3">
+                <div class="col-md-3"></div>
+                <div class="col-md-2">Enter number of questions: </div>
+                <div class="col-md-7"></div>
             </div>
 
             <!-- Input -->
             <div class="row mt-2">
-                <div class="col-md-3"></div>
-                <div class="col-md-9">
+                <div class="col-md-4"></div>
+                <div class="col-md-3 text-center">
                     <input type="text" name="quizQuantity">
                 </div>
+                <div class="col-md-5"></div>
             </div>
 
             <!-- Button -->
             <div class="row mt-4">
-                <div class="col-md-4"></div>
+                <div class="col-md-5"></div>
                 <div class="col-md-2">
                     <input type="submit" value="Start Quiz">
-                    <div class="col-md-6"></div>
                 </div>
+                <div class="col-md-5"></div>
+            </div>
         </form>
     </content>
 </div>

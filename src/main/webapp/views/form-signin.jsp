@@ -17,11 +17,12 @@
         <!-- Menu -->
         <nav class="pt-3 pb-3 mt-3 mb-5 text-center nav-menu">
             <div class="row">
+                <div class="col-md-1"></div>
                 <div class="col-md-2"><a href="http://localhost:8080/signin">Home</a></div>
                 <div class="col-md-2"><a href="http://localhost:8080/take-quiz">Take Quiz</a></div>
                 <div class="col-md-2"><a href="http://localhost:8080/make-quiz">Make Quiz</a></div>
-                <div class="col-md-2"><a href="">Manage Quiz</a></div>
-                <div class="col-md-4"></div>
+                <div class="col-md-2"><a href="http://localhost:8080/manage-quiz">Manage Quiz</a></div>
+                <div class="col-md-3"></div>
             </div>
         </nav>
     </header>
@@ -32,8 +33,8 @@
         <!-- Login Form -->
         <form action="/login-choice" method="post">
             <div class="row">
-                <div class="col-md-4"></div>
-                <div class="col-md-3">
+                <div class="col-md-5"></div>
+                <div class="col-md-2">
                     <h2>Login Form</h2>
                 </div>
                 <div class="col-md-5"></div>
@@ -42,36 +43,40 @@
 
             <!-- Username -->
             <div class="row mt-4">
-                <div class="col-md-3"></div>
+                <div class="col-md-4"></div>
                 <div class="col-md-1">Username: </div>
                 <div class="col-md-2">
                     <input type="text" name="username">
                 </div>
-                <div class="col-md-6"></div>
+                <div class="col-md-5"></div>
             </div>
 
             <!-- Password -->
             <div class="row mt-2">
-                <div class="col-md-3"></div>
+                <div class="col-md-4"></div>
                 <div class="col-md-1">Password: </div>
                 <div class="col-md-2">
-                    <input type="text" name="password">
+                    <input type="password" name="password">
                 </div>
-                <div class="col-md-6"></div>
+                <div class="col-md-5"></div>
             </div>
 
             <!-- Button -->
             <div class="row mt-4">
-                <div class="col-md-4"></div>
+                <div class="col-md-5"></div>
                 <div class="col-md-2">
                     <button type="submit" name="submitButton" value="Sign in">Sign in</button>
                     <button type="submit" name="submitButton" value="Sign up">Sign up</button>
                 </div>
-                <div class="col-md-6"></div>
+                <div class="col-md-5"></div>
             </div>
         </form>
+
         <% if (request.getAttribute("error") != null) { %>
-        <p class="text-center text-danger"><%= request.getAttribute("error") %></p>
+        <script>
+            var errorMessage = '<%= request.getAttribute("error") %>';
+            alert(errorMessage);
+        </script>
         <% } %>
     </content>
 </div>

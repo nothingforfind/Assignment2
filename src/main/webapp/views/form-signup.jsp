@@ -17,11 +17,12 @@
         <!-- Menu -->
         <nav class="pt-3 pb-3 mt-3 mb-5 text-center nav-menu">
             <div class="row">
+                <div class="col-md-1"></div>
                 <div class="col-md-2"><a href="http://localhost:8080/signin">Home</a></div>
                 <div class="col-md-2"><a href="http://localhost:8080/take-quiz">Take Quiz</a></div>
                 <div class="col-md-2"><a href="http://localhost:8080/make-quiz">Make Quiz</a></div>
-                <div class="col-md-2"><a href="">Manage Quiz</a></div>
-                <div class="col-md-4"></div>
+                <div class="col-md-2"><a href="http://localhost:8080/manage-quiz">Manage Quiz</a></div>
+                <div class="col-md-3"></div>
             </div>
         </nav>
     </header>
@@ -29,59 +30,67 @@
 
 <div class="container-fluid col-10">
     <form action="/filled-form" method="post">
-        <div class="row col-10">
-            <div class="col-md-5"></div>
-            <div class="col-md-2 text-center">
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4 text-center">
                 <h2>Registrator Form</h2>
             </div>
-            <div class="col-md-5"></div>
+            <div class="col-md-4"></div>
         </div>
 
         <div class="row mt-4">
-            <div class="col-md-3"></div>
-            <div class="col-md-1 label-register">Username: </div>
+            <div class="col-md-4"></div>
+            <div class="col-md-1">Username: </div>
             <div class="col-md-2">
                 <input type="text" name="username">
             </div>
+            <div class="col-md-5"></div>
         </div>
 
         <div class="row mt-4">
-            <div class="col-md-3"></div>
-            <div class="col-md-1 label-register">Password: </div>
+            <div class="col-md-4"></div>
+            <div class="col-md-1">Password: </div>
             <div class="col-md-2">
-                <input type="text" name="password">
+                <input type="password" name="password">
             </div>
+            <div class="col-md-5"></div>
         </div>
 
         <div class="row mt-4">
-            <div class="col-md-3"></div>
-            <div class="col-md-1 label-register">Role: </div>
+            <div class="col-md-4"></div>
+            <div class="col-md-1">Role: </div>
             <div class="col-md-2">
                 <select name="role">
                     <option value="teacher">Teacher</option>
                     <option value="user">User</option>
                 </select>
             </div>
+            <div class="col-md-5"></div>
         </div>
 
         <div class="row mt-4">
-            <div class="col-md-3"></div>
-            <div class="col-md-1 label-register">Email: </div>
+            <div class="col-md-4"></div>
+            <div class="col-md-1">Email: </div>
             <div class="col-md-2">
                 <input type="text" name="email">
             </div>
+            <div class="col-md-5"></div>
         </div>
 
         <div class="row mt-4">
-            <div class="col-md-3"></div>
-            <div class="col-md-3 text-center">
-                <input type="submit" class="button-submit" value="Submit">
+            <div class="col-md-4"></div>
+            <div class="col-md-4 text-center">
+                <input type="submit" value="Submit">
             </div>
+            <div class="col-md-4"></div>
         </div>
     </form>
 
     <% if (request.getAttribute("error") != null) { %>
-    <p style="color: red;"><%= request.getAttribute("error") %></p>
+    <script>
+        var errorMessage = '<%= request.getAttribute("error") %>';
+        alert(errorMessage);
+    </script>
     <% } %>
 </div>
 </body>

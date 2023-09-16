@@ -1,3 +1,6 @@
+<%@ page import="com.example.assignment2.User" %>
+<%@ page import="java.util.List" %>
+<%@ page import="com.example.assignment2.Question" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,6 +15,7 @@
 </head>
 
 <body>
+
 <div class="container-fluid col-11">
     <header>
         <!-- Menu -->
@@ -34,22 +38,20 @@
 </div>
 
 <div class="container-fluid col-10">
-    <div class="row">
-        <div class="col-md-5"></div>
-        <div class="col-md-2">Your score is ${sessionScope.result}</div>
-        <div class="col-md-5"></div>
+    <div class="row m-4">
+        <div class="col-md-2"></div>
+        <div class="col-md-6 text-center">Question</div>
+        <div class="col-md-2 text-center">DateCreated</div>
+        <div class="col-md-2"></div>
     </div>
-    <form action="/take-quiz">
-        <div class="row mt-3">
-            <div class="col-md-4"></div>
-            <div class="col-md-2 text-take-another-test">Take another test</div>
-            <div class="col-md-2">
-                <input type="submit" class="button-another-test" value="Submit">
-            </div>
-            <div class="col-md-4"></div>
-        </div>
-    </form>
-</div>
-</body>
 
-</html>
+    <% List <Question> list = (List) session.getAttribute("questionList");
+        for (Question question : list) {%>
+    <div class="row m-4">
+        <div class="col-md-2"></div>
+        <div class="col-md-6"><p><%= question.getQuestionContent()%></p></div>
+        <div class="col-md-2 text-center"><p><%= question.getCreatedDate()%></p></div>
+        <div class="col-md-2"></div>
+    </div>
+        <%}%>
+</div>

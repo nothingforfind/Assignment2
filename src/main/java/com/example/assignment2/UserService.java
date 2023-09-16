@@ -1,4 +1,4 @@
-package com.example.assignment1;
+package com.example.assignment2;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +12,7 @@ import java.util.List;
 public class UserService {
 
     private final DataSource dataSource;
+    List <Question> questionList = new ArrayList<>();
 
     @Autowired
     public UserService(DataSource dataSource) {
@@ -72,7 +73,7 @@ public class UserService {
     }
 
     public List<Question> getQuestionsByQuantity(int quantity) {
-        List<Question> questions = new ArrayList<>();
+        questionList.clear();
         try (Connection connection = dataSource.getConnection()) {
             String query = "SELECT * FROM Quiz ORDER BY RAND() LIMIT ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -90,12 +91,12 @@ public class UserService {
                 question.setAnswer2(resultSet.getString("answer2"));
                 question.setAnswer3(resultSet.getString("answer3"));
                 question.setAnswer4(resultSet.getString("answer4"));
-                questions.add(question);
+                questionList.add(question);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return questions;
+        return questionList;
     }
 
     public void insertQuestion(Question question) {
@@ -158,5 +159,23 @@ public class UserService {
             e.printStackTrace();
         }
         return result;
+    }
+
+    public List<Question> getQuestions() {
+        questionList.clear();
+        try (Connection connection = dataSource.getConnection()) {
+            String query = "SELECT * FROM Quiz ORDER BY created_date DESC";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                Question question = new Question();
+                question.setQuestionContent(resultSet.getString("question_content"));
+                question.setCreatedDate(resultSet.getString("created_date"));
+                questionList.add(question);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return questionList;
     }
 }

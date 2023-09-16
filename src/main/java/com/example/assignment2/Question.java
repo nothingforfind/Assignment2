@@ -1,4 +1,4 @@
-package com.example.assignment1;
+package com.example.assignment2;
 
 public class Question {
     private String questionId;
@@ -12,11 +12,16 @@ public class Question {
     private String answer3;
     private String answer4;
 
+    private String createdDate;
+
     public Question() {
         // Constructor mặc định
     }
 
-    public Question(String questionId, String questionContent, String option1, String option2, String option3, String option4, String answer1, String answer2, String answer3, String answer4) {
+    public Question(String questionId, String questionContent,
+                    String option1, String option2, String option3, String option4,
+                    String answer1, String answer2, String answer3, String answer4,
+                    String createdDate) {
         this.questionId = questionId;
         this.questionContent = questionContent;
         this.option1 = option1;
@@ -27,6 +32,7 @@ public class Question {
         this.answer2 = answer2;
         this.answer3 = answer3;
         this.answer4 = answer4;
+        this.createdDate= createdDate;
     }
 
     public Question(String questionContent, String option1, String option2, String option3, String option4, String answer1, String answer2, String answer3, String answer4) {
@@ -119,5 +125,13 @@ public class Question {
 
     public void setAnswer4(String answer4) {
         this.answer4 = answer4;
+    }
+
+    public String getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(String createdDate) {
+        this.createdDate = createdDate;
     }
 }

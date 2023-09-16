@@ -17,14 +17,16 @@
         <!-- Menu -->
         <nav class="pt-3 pb-3 mt-3 mb-5 text-center nav-menu">
             <div class="row">
+                <div class="col-md-1"></div>
                 <div class="col-md-2"><a href="http://localhost:8080/signin">Home</a></div>
                 <div class="col-md-2"><a href="http://localhost:8080/take-quiz">Take Quiz</a></div>
                 <div class="col-md-2"><a href="http://localhost:8080/make-quiz">Make Quiz</a></div>
-                <div class="col-md-2"><a href="">Manage Quiz</a></div>
+                <div class="col-md-2"><a href="http://localhost:8080/manage-quiz">Manage Quiz</a></div>
                 <% if (session.getAttribute("user") != null) { %>
-                <div class="col-md-4"><a href="http://localhost:8080/signout">Sign out</a></div>
+                <div class="col-md-2"><a href="http://localhost:8080/signout">Sign out</a></div>
+                <div class="col-md-1"></div>
                 <% } else { %>
-                <div class="col-md-4"></div>
+                <div class="col-md-3"></div>
                 <% } %>
             </div>
         </nav>
@@ -36,32 +38,33 @@
         <!-- Login Form -->
         <form id="my-form" action="evaluate">
             <div class="row">
-                <div class="col-md-3"></div>
-                <div class="col-md-3">
-                    <h2>Welcome, </h2>
+                <div class="col-md-4"></div>
+                <div class="col-md-4 text-center">
+                    <h2>Welcome, ${sessionScope.user.userId}</h2>
                 </div>
-                <div class="col-md-6"></div>
+                <div class="col-md-4"></div>
             </div>
 
             <!-- Time remaining -->
             <div class="row mt-5">
-                <div class="col-md-5"></div>
-                <div class="col-md-2">Time remaining:  <p id="countdown">2:00</p></div>
-                <div class="col-md-5"></div>
+                <div class="col-md-6"></div>
+                <div class="col-md-2" style="text-align: right">Time remaining:</div>
+                <div class="col-md-1"><p id="countdown">2:00</p></div>
+                <div class="col-md-3"></div>
             </div>
 
             <!-- Tick chose answer -->
             <div class="row mt-2">
-                <div class="col-md-2"></div>
-                <div class="col-md-10">
+                <div class="col-md-3"></div>
+                <div class="col-md-6">
                     <h3>Question ${sessionScope.quantity}: ${sessionScope.question.questionContent}?</h3>
                 </div>
+                <div class="col-md-3"></div>
             </div>
 
             <div class="row mt-2">
-                <div class="col-md-2"></div>
-                <div class="col-md-10">
-                    <form>
+                <div class="col-md-3"></div>
+                <div class="col-md-2">
                         <input type="checkbox" name="an1" value="${sessionScope.question.option1}">
                         <label>${sessionScope.question.option1}</label><br>
                         <input type="checkbox" name="an2" value="${sessionScope.question.option2}">
@@ -70,8 +73,15 @@
                         <label>${sessionScope.question.option3}</label><br>
                         <input type="checkbox" name="an4" value="${sessionScope.question.option4}">
                         <label>${sessionScope.question.option4}</label><br><br>
-                        <input type="submit" class="button-submit" value="Submit">
-                    </form>
+
+                </div>
+                <div class="col-md-7"></div>
+                <div class="row mt-2 text-center">
+                    <div class="col-md-5"></div>
+                    <div class="col-md-2">
+                        <input type="submit" value="Submit">
+                    </div>
+                    <div class="col-md-5"></div>
                 </div>
             </div>
         </form>
